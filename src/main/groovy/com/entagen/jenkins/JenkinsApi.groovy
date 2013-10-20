@@ -59,6 +59,10 @@ class JenkinsApi {
         post('createItem', missingJobConfig, [name: missingJob.jobName, mode: 'copy', from: templateJob.jobName], ContentType.XML)
 
         post('job/' + missingJob.jobName + "/config.xml", missingJobConfig, [:], ContentType.XML)
+        
+        //Make job run correctly
+        post('job/' + missingJob.jobName + '/disable')
+        post('job/' + missingJob.jobName + '/enable')
     }
 
     void startJob(ConcreteJob job) {
